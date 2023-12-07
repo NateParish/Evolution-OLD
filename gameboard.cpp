@@ -58,18 +58,27 @@ void Gameboard::CreateGround(int inputRowCount, int inputColumnCount, int cellWi
 	
 	std::cout << "groundCreated" << std::endl;
 	//int colAdj = columnCount - 1;
+	int m(100);
 
 	for (int k = 0; k < rowCount; ++k)
 	{
+
 		for (int i = 0; i < columnCount; ++i)
 		{
+			if (m < 1)
+			{
+				m = 100;
+			}
+
 			Ground* ground = new Ground(); 
 			ground->row = k + 1;
 			ground->column = i + 1;
+			ground->moisture = m;
 			ground->x = gameBoardX + cellWidth * i;
 			ground->y = gameBoardY + cellWidth * k;
 			ground->rectangle.setPosition(ground->x, ground->y);
-			groundList.push_back(ground);  
+			groundList.push_back(ground); 
+			m--;
 		}
 
 	}
@@ -91,7 +100,7 @@ void Gameboard::DrawGround(sf::RenderWindow* window)
 	for (int i = 0; i < groundList.size(); ++i)
 	{
 
-		//groundList[i]->setGroundColor();
+		groundList[i]->setGroundColor();
 		groundList[i]->DrawGround(window);
 
 	}
