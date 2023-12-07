@@ -140,16 +140,27 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="cell.cpp" />
+    <ClCompile Include="critter.cpp" />
+    <ClCompile Include="critter_stats_box.cpp" />
     <ClCompile Include="DNA.cpp" />
     <ClCompile Include="gene.cpp" />
     <ClCompile Include="geneticcalculator.cpp" />
+    <ClCompile Include="gameboard.cpp" />
+    <ClCompile Include="ground.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="vars.cpp" />
+    <ClCompile Include="sun.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cell.h" />
+    <ClInclude Include="critter.h" />
+    <ClInclude Include="critter_stats_box.h" />
     <ClInclude Include="DNA.h" />
     <ClInclude Include="gene.h" />
     <ClInclude Include="geneticcalculator.h" />
+    <ClInclude Include="gameboard.h" />
+    <ClInclude Include="ground.h" />
+    <ClInclude Include="sun.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

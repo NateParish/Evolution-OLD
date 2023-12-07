@@ -13,42 +13,93 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\Genetics">
+    <Filter Include="Source Files\Critter">
+      <UniqueIdentifier>{428b9af3-4df2-4555-a3ed-b6cb92a011cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Critter\Genetics">
       <UniqueIdentifier>{516936af-7485-4b03-b592-d85fd29db111}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Genetics">
+    <Filter Include="Header Files\Critter">
+      <UniqueIdentifier>{a9727c8d-aa8c-4d2d-ab49-425debfcf2c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Critter\Genetics">
       <UniqueIdentifier>{6eb26941-6088-4351-867f-47b4a71c8a67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Environment">
+      <UniqueIdentifier>{4306da32-57d2-4e2c-beb3-c8347d369d10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Environment">
+      <UniqueIdentifier>{dec5c139-52ed-485c-8b2d-cdb50fb9a511}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GUI">
+      <UniqueIdentifier>{a887f2d4-5e90-47a8-a68d-6e4e1ee13a47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GUI">
+      <UniqueIdentifier>{71c6a910-4833-4dfd-988f-7ff65cbe11f8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="cell.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="DNA.cpp">
-      <Filter>Source Files\Genetics</Filter>
+      <Filter>Source Files\Critter\Genetics</Filter>
     </ClCompile>
     <ClCompile Include="gene.cpp">
-      <Filter>Source Files\Genetics</Filter>
+      <Filter>Source Files\Critter\Genetics</Filter>
     </ClCompile>
     <ClCompile Include="geneticcalculator.cpp">
-      <Filter>Source Files\Genetics</Filter>
+      <Filter>Source Files\Critter\Genetics</Filter>
+    </ClCompile>
+    <ClCompile Include="cell.cpp">
+      <Filter>Source Files\Critter</Filter>
+    </ClCompile>
+    <ClCompile Include="critter.cpp">
+      <Filter>Source Files\Critter</Filter>
+    </ClCompile>
+    <ClCompile Include="sun.cpp">
+      <Filter>Source Files\Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="vars.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gameboard.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="critter_stats_box.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ground.cpp">
+      <Filter>Source Files\Environment</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="cell.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="DNA.h">
-      <Filter>Header Files\Genetics</Filter>
+      <Filter>Header Files\Critter\Genetics</Filter>
     </ClInclude>
     <ClInclude Include="gene.h">
-      <Filter>Header Files\Genetics</Filter>
+      <Filter>Header Files\Critter\Genetics</Filter>
     </ClInclude>
     <ClInclude Include="geneticcalculator.h">
-      <Filter>Header Files\Genetics</Filter>
+      <Filter>Header Files\Critter\Genetics</Filter>
+    </ClInclude>
+    <ClInclude Include="cell.h">
+      <Filter>Header Files\Critter</Filter>
+    </ClInclude>
+    <ClInclude Include="critter.h">
+      <Filter>Header Files\Critter</Filter>
+    </ClInclude>
+    <ClInclude Include="sun.h">
+      <Filter>Header Files\Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="gameboard.h">
+      <Filter>Header Files\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="critter_stats_box.h">
+      <Filter>Header Files\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ground.h">
+      <Filter>Header Files\Environment</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
