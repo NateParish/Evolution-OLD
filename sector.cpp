@@ -51,6 +51,35 @@ Sector::Sector(sf::RenderWindow* window)
 	tile35.Setup(originX + (4 * cellSize), originY + (5 * cellSize), 5, 6, cellSize, cellSize);
 	tile36.Setup(originX + (5 * cellSize), originY + (5 * cellSize), 6, 6, cellSize, cellSize);
 
+	tileList.push_back(&tile1);
+	tileList.push_back(&tile2);
+	tileList.push_back(&tile3);
+	tileList.push_back(&tile4);
+	tileList.push_back(&tile5);
+	tileList.push_back(&tile6);
+	tileList.push_back(&tile7);
+	tileList.push_back(&tile8);
+	tileList.push_back(&tile9);
+	tileList.push_back(&tile10);
+	tileList.push_back(&tile11);
+	tileList.push_back(&tile12);
+	tileList.push_back(&tile13);
+	tileList.push_back(&tile14);
+	tileList.push_back(&tile15);
+	tileList.push_back(&tile16);
+	tileList.push_back(&tile17);
+	tileList.push_back(&tile18);
+	tileList.push_back(&tile19);
+	tileList.push_back(&tile20);
+	tileList.push_back(&tile31);
+	tileList.push_back(&tile32);
+	tileList.push_back(&tile33);
+	tileList.push_back(&tile34);
+	tileList.push_back(&tile35);
+	tileList.push_back(&tile36);
+
+
+
 	verticalGridline1;
 	verticalGridline2;
 	verticalGridline3;
@@ -268,13 +297,18 @@ void Sector::DrawGridlines()
 void Sector::CalculateNewOrigin(sf::Vector2i mousePosition)
 {
 
+	//std::cout << "old origin: " << originX << " " << originY << std::endl;
 	int clickedOffsetX(mousePosition.x - originX);
 	int clickedOffsetY(mousePosition.y - originY);
 	
-	originX = mousePosition.x - clickedOffsetX;
-	originY = mousePosition.y - clickedOffsetY;
-	
+	originX = mousePosition.x + clickedOffsetX;
+	originY = mousePosition.y + clickedOffsetY;
 
+	//originX = mousePosition.x;
+	//originY = mousePosition.y;
+	
+	std::cout << "old origin: " << clickedOffsetX << " " << clickedOffsetY << std::endl;
+	//std::cout << "new origin: " << originX << "  " << originY << std::endl;
 }
 
 void Sector::UpdatePosition()

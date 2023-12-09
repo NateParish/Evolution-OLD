@@ -52,6 +52,8 @@ public:
 	Tile tile35;
 	Tile tile36;
 
+	std::vector<Tile*> tileList;
+
 	sf::RectangleShape verticalGridline1;
 	sf::RectangleShape verticalGridline2;
 	sf::RectangleShape verticalGridline3;

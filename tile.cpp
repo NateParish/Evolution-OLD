@@ -15,7 +15,7 @@ Tile::Tile()
 	hovered = false;
 	rectangle = sf::RectangleShape(sf::Vector2f(25, 25));
 	rectangle.setPosition(x, y);
-	rectangle.setFillColor(sf::Color(40, 40, 40));
+	rectangle.setFillColor(sf::Color(255, 255, 255));
 	
 
 }
@@ -45,7 +45,7 @@ Tile::~Tile()
 void Tile::DrawTile(sf::RenderWindow* window)
 {
 	window->draw(rectangle);
-	std::cout << "ground drawn  - X:  " << x << "  Y:  " << y <<"  width:  " << width << "  height:  " << height << std::endl;
+	//std::cout << "ground drawn  - X:  " << x << "  Y:  " << y <<"  width:  " << width << "  height:  " << height << std::endl;
 }
 
 void Tile::Setup(int xInput, int yInput, int columnInput, int rowInput, int widthInput, int heightInput)

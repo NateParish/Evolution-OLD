@@ -56,7 +56,7 @@ void Gameboard::DrawGrid(sf::RenderWindow* window)
 void Gameboard::CreateTile(int inputRowCount, int inputColumnCount, int cellWidth)
 {
 	
-	std::cout << "groundCreated" << std::endl;
+	//std::cout << "groundCreated" << std::endl;
 	//int colAdj = columnCount - 1;
 	int m(100);
 

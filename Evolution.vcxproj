@@ -146,6 +146,7 @@
     <ClCompile Include="gene.cpp" />
     <ClCompile Include="geneticcalculator.cpp" />
     <ClCompile Include="gameboard.cpp" />
+    <ClCompile Include="graphics_processor.cpp" />
     <ClCompile Include="tile.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="sector.cpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="gene.h" />
     <ClInclude Include="geneticcalculator.h" />
     <ClInclude Include="gameboard.h" />
+    <ClInclude Include="graphics_processor.h" />
     <ClInclude Include="tile.h" />
     <ClInclude Include="sector.h" />
     <ClInclude Include="sun.h" />

@@ -9,6 +9,7 @@
 #include "tile.h"
 #include "gameboard.h"
 #include "sector.h"
+#include "graphics_processor.h"
 //#include "DNA.h"
 
 
@@ -34,7 +35,7 @@ int main()
 	//sprite.setScale(.25, .25);
 
 
-	sf::RenderWindow window(sf::VideoMode(1800, 950, 32), "SFML Graphics");
+	sf::RenderWindow window(sf::VideoMode(1000, 500, 32), "SFML Graphics");
 	sf::RenderWindow* windowPtr(&window);
 	sf::Event e;
 	window.setFramerateLimit(FPS);
@@ -56,13 +57,17 @@ int main()
 
 
 	Sun sun;
-	Gameboard gameboard;
-	gameboard.CreateTile(2, 71, cellWidth);
-	gameboard.TileListPrintout();
+	//Gameboard gameboard;
+	//gameboard.CreateTile(2, 71, cellWidth);
+	//gameboard.TileListPrintout();
 
 	Sector sector1(windowPtr);
 	sector1.SetAllTilePosition();
 	sector1.SetupGridlines();
+
+	GraphicsProcessor graphicsProcessor9000(windowPtr);
+
+	//graphicsProcessor9000.UpdateItemPositions(&sector1);
 
 
 	std::cout << "Sun Output" << sun.output << std::endl;
@@ -145,7 +150,7 @@ int main()
 
 		window.clear();
 
-		mouseClickedFlag = false;
+		//mouseClickedFlag = false;
 
 		while (window.pollEvent(e))
 		{
@@ -193,7 +198,8 @@ int main()
 			if (e.type == sf::Event::KeyPressed) {
 				if (e.key.code == sf::Keyboard::Space) {
 					//critter1.Kill();
-					critter1.RotateCritter();
+					//critter1.RotateCritter();
+					graphicsProcessor9000.UpdateItemPositions(&sector1);
 				}
 			}
 
@@ -206,7 +212,7 @@ int main()
 
 		//gameboard.TileHovered(mousePosition);
 		//gameboard.DrawTile(windowPtr);
-		//sector1.DrawAllTiles();
+		sector1.DrawAllTiles();
 		sector1.DrawGridlines();
 		//gameboard.DrawGrid(windowPtr);
 		
