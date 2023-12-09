@@ -11,15 +11,15 @@ Gameboard::Gameboard()
 	gameBoardHeight = 750;
 	columnCount = std::floor(gameBoardWidth / cellSize);
 	rowCount = std::floor(gameBoardHeight / cellSize);
-	groundList;
+	tileList;
 	waterView = true;
 
 }
 
 Gameboard::~Gameboard()
 {
-	for (const auto& ground : groundList) {
-		delete ground; 
+	for (const auto& Tile : tileList) {
+		delete Tile;
 	}
 
 }
@@ -53,7 +53,7 @@ void Gameboard::DrawGrid(sf::RenderWindow* window)
 
 }
 
-void Gameboard::CreateGround(int inputRowCount, int inputColumnCount, int cellWidth)
+void Gameboard::CreateTile(int inputRowCount, int inputColumnCount, int cellWidth)
 {
 	
 	std::cout << "groundCreated" << std::endl;
@@ -70,14 +70,14 @@ void Gameboard::CreateGround(int inputRowCount, int inputColumnCount, int cellWi
 				m = 100;
 			}
 
-			Ground* ground = new Ground(); 
-			ground->row = k + 1;
-			ground->column = i + 1;
-			ground->moisture = m;
-			ground->x = gameBoardX + cellWidth * i;
-			ground->y = gameBoardY + cellWidth * k;
-			ground->rectangle.setPosition(ground->x, ground->y);
-			groundList.push_back(ground); 
+			Tile* tile = new Tile();
+			tile->row = k + 1;
+			tile->column = i + 1;
+			tile->moisture = m;
+			tile->x = gameBoardX + cellWidth * i;
+			tile->y = gameBoardY + cellWidth * k;
+			tile->rectangle.setPosition(tile->x, tile->y);
+			tileList.push_back(tile);
 			m--;
 		}
 
@@ -85,45 +85,45 @@ void Gameboard::CreateGround(int inputRowCount, int inputColumnCount, int cellWi
 
 }
 
-void Gameboard::GroundListPrintout()
+void Gameboard::TileListPrintout()
 {
-	for (int i = 0; i < groundList.size(); ++i)
+	for (int i = 0; i < tileList.size(); ++i)
 	{
-		std::cout << groundList[i]->x << std::endl;
+		std::cout << tileList[i]->x << std::endl;
 	}
 }
 
-void Gameboard::DrawGround(sf::RenderWindow* window)
+void Gameboard::DrawTile(sf::RenderWindow* window)
 {
 
 
-	for (int i = 0; i < groundList.size(); ++i)
+	for (int i = 0; i < tileList.size(); ++i)
 	{
 
-		groundList[i]->setGroundColor();
-		groundList[i]->DrawGround(window);
+		tileList[i]->setTileColor();
+		tileList[i]->DrawTile(window);
 
 	}
 
 
 }
 
-void Gameboard::GroundHovered(sf::Vector2i mousePosition)
+void Gameboard::TileHovered(sf::Vector2i mousePosition)
 {
 	bool switchOff(false);
-	bool groundHighlightLastFrame;
+	bool tileHighlightLastFrame;
 
-	for (Ground* ground : groundList)
+	for (Tile* tile : tileList)
 
 	{
-		groundHighlightLastFrame = ground->hovered;
+		tileHighlightLastFrame = tile->hovered;
 
-		ground->hovered = false;
+		tile->hovered = false;
 
 
 
-		int xPos = ground->rectangle.getPosition().x;
-		int yPos = ground->rectangle.getPosition().y;
+		int xPos = tile->rectangle.getPosition().x;
+		int yPos = tile->rectangle.getPosition().y;
 
 		if (mousePosition.x >= xPos)
 		{
@@ -133,32 +133,32 @@ void Gameboard::GroundHovered(sf::Vector2i mousePosition)
 				{
 					if (mousePosition.y <= (yPos + cellSize))
 					{
-						ground->hovered = true;
+						tile->hovered = true;
 						
 					}
 				}
 			}
 		}
 
-		if (ground->hovered == true)
+		if (tile->hovered == true)
 		{
-			if (groundHighlightLastFrame == false)
+			if (tileHighlightLastFrame == false)
 			{
-				ground->rectangle.setFillColor(sf::Color(60, 60, 60));
+				tile->rectangle.setFillColor(sf::Color(60, 60, 60));
 			}
 		}
 		else
 		{
-			if (groundHighlightLastFrame == true)
+			if (tileHighlightLastFrame == true)
 			{
-				ground->rectangle.setFillColor(sf::Color(40, 40, 40));
+				tile->rectangle.setFillColor(sf::Color(40, 40, 40));
 			}
 		}
 	}
 }
 
 
-void Gameboard::setGroundColors()
+void Gameboard::setTileColors()
 {
 	float red();
 

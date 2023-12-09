@@ -3,7 +3,7 @@
 #include <vector>
 #include "SFML/Graphics.hpp"
 #include "vars.cpp"
-#include "ground.h"
+#include "tile.h"
 
 
 class Gameboard
@@ -19,7 +19,7 @@ public:
 	float gameBoardWidth;
 	float columnCount;
 	float rowCount;
-	std::vector<Ground*> groundList;
+	std::vector<Tile*> tileList;
 	bool waterView;
 
 
@@ -27,11 +27,11 @@ public:
 	~Gameboard();
 
 	void DrawGrid(sf::RenderWindow* window);
-	void CreateGround(int rowCount, int columnCount, int cellWidth);
-	void GroundListPrintout();
-	void DrawGround(sf::RenderWindow* window);
-	void GroundHovered(sf::Vector2i mousePosition);
-	void setGroundColors();
+	void CreateTile(int rowCount, int columnCount, int cellWidth);
+	void TileListPrintout();
+	void DrawTile(sf::RenderWindow* window);
+	void TileHovered(sf::Vector2i mousePosition);
+	void setTileColors();
 
 
 

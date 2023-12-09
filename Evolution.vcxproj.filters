@@ -37,6 +37,12 @@
     <Filter Include="Header Files\GUI">
       <UniqueIdentifier>{71c6a910-4833-4dfd-988f-7ff65cbe11f8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Environment\Terrain">
+      <UniqueIdentifier>{a254232c-cc38-4eab-a13f-10199fe0e4b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Environment\Terrain">
+      <UniqueIdentifier>{e8e09681-0d31-464f-b337-318ce2f4da48}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -69,8 +75,11 @@
     <ClCompile Include="critter_stats_box.cpp">
       <Filter>Source Files\GUI</Filter>
     </ClCompile>
-    <ClCompile Include="ground.cpp">
-      <Filter>Source Files\Environment</Filter>
+    <ClCompile Include="sector.cpp">
+      <Filter>Source Files\Environment\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="tile.cpp">
+      <Filter>Source Files\Environment\Terrain</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -98,8 +107,11 @@
     <ClInclude Include="critter_stats_box.h">
       <Filter>Header Files\GUI</Filter>
     </ClInclude>
-    <ClInclude Include="ground.h">
-      <Filter>Header Files\Environment</Filter>
+    <ClInclude Include="sector.h">
+      <Filter>Header Files\Environment\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="tile.h">
+      <Filter>Header Files\Environment\Terrain</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

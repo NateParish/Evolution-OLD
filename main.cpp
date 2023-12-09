@@ -6,8 +6,9 @@
 #include "critter.h"
 #include "critter_stats_box.h"
 #include "sun.h"
-#include "ground.h"
+#include "tile.h"
 #include "gameboard.h"
+#include "sector.h"
 //#include "DNA.h"
 
 
@@ -37,7 +38,9 @@ int main()
 	sf::RenderWindow* windowPtr(&window);
 	sf::Event e;
 	window.setFramerateLimit(FPS);
-	bool isClickedFlag(false);
+	bool isCritterClickedFlag(false);
+	bool moveTerrainFlag(false);
+	bool mouseClickedFlag(false);
 
 
 	sf::Font font;
@@ -54,54 +57,12 @@ int main()
 
 	Sun sun;
 	Gameboard gameboard;
-	gameboard.CreateGround(2, 71, cellWidth);
-	gameboard.GroundListPrintout();
+	gameboard.CreateTile(2, 71, cellWidth);
+	gameboard.TileListPrintout();
 
-	//Ground ground1;
-
-	//std::vector<Ground*> groundList;
-
-	//int columnCount = gameboard.columnCount;
-
-	//	for (int i = 0; i <= gameboard.columnCount; ++i)
-	//	{
-	//		
-	//		groundList.emplace_back();
-
-	//		Ground* ground = new Ground();
-	//		//newGround.Setup(xPad + cellWidth * i, menuHeight + cellWidth, i, 0, cellWidth, cellWidth);
-
-	//		groundList.push_back(ground);
-
-	//		std::cout << groundList->back().x << std::endl;
-	//	}
-
-	//	std::cout << "*********************** SIZE **************" << groundList.size() << std::endl;
-
-	//	int k(0);
-
-	//	std::cout << groundList[0]->x << std::endl;
-	//	std::cout << groundList[1]->x << std::endl;
-	//	std::cout << groundList[2]->x << std::endl;
-
-	//	
-	//	for (Ground* ground : groundList)
-	{
-		//std::cout << k << std::endl;
-		//k++;
-		
-			//std::cout << ground->x << std::endl;
-			//groundPtr->DrawGround(windowPtr);
-
-	}
-
-	//Ground newGround(xPad + cellWidth, menuHeight + cellWidth, 5, 5, cellWidth, cellWidth);
-
-
-	//ground1.column = 2;
-	//ground1.row = 2;
-	//ground1.x = gameboard.gameBoardX + ground1.row * gameboard.cellSize;
-	//ground1.x = gameboard.gameBoardY + ground1.row * gameboard.cellSize;
+	Sector sector1(windowPtr);
+	sector1.SetAllTilePosition();
+	sector1.SetupGridlines();
 
 
 	std::cout << "Sun Output" << sun.output << std::endl;
@@ -149,6 +110,19 @@ int main()
 		critterOldList = critterList;
 		critterList.clear();
 
+
+
+
+		if (mouseClickedFlag == true)
+		{
+			sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+			sector1.CalculateNewOrigin(mousePosition);
+			sector1.UpdatePosition();
+			std::cout << "move terrain" << std::endl;
+		}
+
+		
+
 		//std::cout << critterOldList.size() << "  /   " << critterList.size() << std::endl;
 
 		//critterList.push_back(&critter1);
@@ -171,6 +145,8 @@ int main()
 
 		window.clear();
 
+		mouseClickedFlag = false;
+
 		while (window.pollEvent(e))
 		{
 			if (e.type == sf::Event::Closed)
@@ -183,20 +159,25 @@ int main()
 			}
 			if (e.type == sf::Event::MouseButtonPressed)
 			{
+				mouseClickedFlag = true;
+				moveTerrainFlag = true;
+
 				mousePosition = sf::Mouse::getPosition(window);
 
 				for (Critter* critterPtr : critterList)
 				{
-					isClickedFlag = false;
+					isCritterClickedFlag = false;
 
-					isClickedFlag = critterPtr->CritterClicked(mousePosition);
+					isCritterClickedFlag = critterPtr->CritterClicked(mousePosition);
 
-					if (isClickedFlag == true)
+					if (isCritterClickedFlag == true)
 					{
 						critterToDisplayPtr = critterPtr;
+						moveTerrainFlag = false;
 					}
 
 				}
+
 				
 			}
 			if (e.type == sf::Event::MouseButtonReleased)
@@ -204,6 +185,7 @@ int main()
 				for (Critter* critterPtr : critterList)
 				{
 					critterPtr->CritterUnClicked();
+					mouseClickedFlag = false;
 				}
 
 			}
@@ -222,9 +204,11 @@ int main()
 		//ground1.DrawGround(windowPtr);
 		//newGround.DrawGround(windowPtr);
 
-		gameboard.GroundHovered(mousePosition);
-		gameboard.DrawGround(windowPtr);
-		gameboard.DrawGrid(windowPtr);
+		//gameboard.TileHovered(mousePosition);
+		//gameboard.DrawTile(windowPtr);
+		//sector1.DrawAllTiles();
+		sector1.DrawGridlines();
+		//gameboard.DrawGrid(windowPtr);
 		
 
 		for (Critter* critterPtr : critterList)
@@ -238,7 +222,7 @@ int main()
 
 		//window.draw(sprite);
 		//ground.DrawGrid(windowPtr);
-		window.draw(text);
+		//window.draw(text);
 		window.display();
 
 	}

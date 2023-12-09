@@ -2,7 +2,7 @@
 #include <iostream>
 #include "SFML/Graphics.hpp"
 
-class Ground
+class Tile
 {
 
 	public:
@@ -18,15 +18,13 @@ class Ground
 		bool hovered;
 		sf::RectangleShape rectangle;
 
-		Ground();
-		Ground(int inputX, int inputY, int inputRow, int inputColumn, int inputWidth, int inputHeight);
-		~Ground();
-		void DrawGround(sf::RenderWindow* window);
+		Tile();
+		Tile(int inputX, int inputY, int inputRow, int inputColumn, int inputWidth, int inputHeight);
+		~Tile();
+		void DrawTile(sf::RenderWindow* window);
 		void Setup(int xInput, int yInput, int columnInput, int rowInput, int widthInput, int heightInput);
 		void SetPosition();
-		void setGroundColor();
-
-
+		void setTileColor();
 
 
 

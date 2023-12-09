@@ -146,8 +146,9 @@
     <ClCompile Include="gene.cpp" />
     <ClCompile Include="geneticcalculator.cpp" />
     <ClCompile Include="gameboard.cpp" />
-    <ClCompile Include="ground.cpp" />
+    <ClCompile Include="tile.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="sector.cpp" />
     <ClCompile Include="vars.cpp" />
     <ClCompile Include="sun.cpp" />
   </ItemGroup>
@@ -159,7 +160,8 @@
     <ClInclude Include="gene.h" />
     <ClInclude Include="geneticcalculator.h" />
     <ClInclude Include="gameboard.h" />
-    <ClInclude Include="ground.h" />
+    <ClInclude Include="tile.h" />
+    <ClInclude Include="sector.h" />
     <ClInclude Include="sun.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
