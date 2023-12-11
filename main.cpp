@@ -104,6 +104,9 @@ int main()
 	text.setFillColor(sf::Color::White);
 	text.setPosition(windowSize.x - 100, 10);
 	sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+	sf::Vector2i mouseAnchor(0, 0);
+	bool mouseAnchorSet = false;
+	std::cout << "**BOOGA** " << mouseAnchorSet << std::endl;
 
 	while (window.isOpen())
 	{
@@ -118,13 +121,8 @@ int main()
 
 
 
-		if (mouseClickedFlag == true)
-		{
-			sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
-			sector1.CalculateNewOrigin(mousePosition);
-			sector1.UpdatePosition();
-			std::cout << "move terrain" << std::endl;
-		}
+
+		
 
 		
 
@@ -166,6 +164,7 @@ int main()
 			{
 				mouseClickedFlag = true;
 				moveTerrainFlag = true;
+				mouseAnchor = sf::Mouse::getPosition(window);
 
 				mousePosition = sf::Mouse::getPosition(window);
 
@@ -202,6 +201,23 @@ int main()
 					graphicsProcessor9000.UpdateItemPositions(&sector1);
 				}
 			}
+
+		}
+
+
+
+		if (mouseClickedFlag == true)
+		{
+			sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+
+			if (mouseAnchorSet == false);
+			{
+				mouseAnchor = sf::Mouse::getPosition(window);
+				mouseAnchorSet = true;
+				std::cout << "mouse Anchor has been set!" << std::endl;
+			}
+
+			std::cout << "mouseClickedFlag: " << mouseClickedFlag <<  " mouseAnchorSet: " << mouseAnchorSet << "  anchorx:  " << mouseAnchor.x << " anchorY : " << mouseAnchor.y << " mousex : " << mousePosition.x << " mousey : " << mousePosition.y << " diff : " << mouseAnchor.x - mousePosition.x << ", " << mouseAnchor.y - mousePosition.y << std::endl;
 
 		}
 

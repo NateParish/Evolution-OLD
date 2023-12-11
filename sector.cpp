@@ -296,19 +296,25 @@ void Sector::DrawGridlines()
 
 void Sector::CalculateNewOrigin(sf::Vector2i mousePosition)
 {
+	std::cout << originX << "   " << originY << std::endl;
 
 	//std::cout << "old origin: " << originX << " " << originY << std::endl;
 	int clickedOffsetX(mousePosition.x - originX);
 	int clickedOffsetY(mousePosition.y - originY);
 	
+
+	std::cout << "originX:  " << originX << "  mousePosX:  " << mousePosition.x << "  Offsetx:  " << clickedOffsetX << "  originY:  " << originY << "  mousePosY : " << mousePosition.y << "  offsetY: " << clickedOffsetY << std::endl;
+
 	originX = mousePosition.x + clickedOffsetX;
 	originY = mousePosition.y + clickedOffsetY;
 
 	//originX = mousePosition.x;
 	//originY = mousePosition.y;
 	
-	std::cout << "old origin: " << clickedOffsetX << " " << clickedOffsetY << std::endl;
+	//std::cout << "old origin: " << clickedOffsetX << " " << clickedOffsetY << std::endl;
 	//std::cout << "new origin: " << originX << "  " << originY << std::endl;
+	//SetupGridlines();
+
 }
 
 void Sector::UpdatePosition()
