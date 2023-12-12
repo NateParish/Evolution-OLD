@@ -13,6 +13,14 @@ public:
 	int originX;
 	int originY;
 	int cellSize;
+	int column;
+	int row;
+	float width;
+	int clickedOffsetX;
+	int clickedOffsetY;
+	sf::Color minorGridlineColor;
+	sf::Color majorGridlineColor;
+
 
 
 	Tile tile1;
@@ -70,6 +78,9 @@ public:
 	sf::RectangleShape horizontalGridline6;
 	sf::RectangleShape horizontalGridline7;
 
+	std::vector<sf::RectangleShape*> gridlineList;
+
+
 	Sector(sf::RenderWindow* window);
 	~Sector();
 
@@ -81,6 +92,11 @@ public:
 	void DrawGridlines();
 	void CalculateNewOrigin(sf::Vector2i mousePosition);
 	void UpdatePosition();
+	void UpdateGridlinePosition();
+	void TileSetPosition();
+	void TileHovered(sf::Vector2i mousePosition);
+	void UpdateOrigin(int x, int y);
+
 
 
 

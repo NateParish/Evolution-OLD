@@ -17,6 +17,7 @@ class Tile
 		bool clicked;
 		bool hovered;
 		sf::RectangleShape rectangle;
+		sf::Color tileBaseColor;
 
 		Tile();
 		Tile(int inputX, int inputY, int inputRow, int inputColumn, int inputWidth, int inputHeight);

@@ -5,8 +5,8 @@
 
 CritterStatsBox::CritterStatsBox()
 {
-	x = 10;
-	y = 10;
+	x = 0;
+	y = 0;
 	height = 125;
 	width = 500;
 	bgColor = sf::Color(30, 30, 30);

@@ -4,6 +4,7 @@
 #include "SFML/Graphics.hpp"
 #include "vars.cpp"
 #include "tile.h"
+#include "sector.h"
 
 
 class Gameboard
@@ -12,29 +13,22 @@ class Gameboard
 
 public:
 
+	float cellInitialSize;
+	float zoom;
 	float cellSize;
 	float gameBoardX;
 	float gameBoardY;
-	float gameBoardHeight;
-	float gameBoardWidth;
-	float columnCount;
-	float rowCount;
-	std::vector<Tile*> tileList;
-	bool waterView;
+	float sectorColumnCount;
+	float sectorRowCount;
+	sf::RenderWindow* window;
+	std::vector<Sector*> sectorList;
 
 
-	Gameboard();
+	Gameboard(sf::RenderWindow* windowPtr);
 	~Gameboard();
-
-	void DrawGrid(sf::RenderWindow* window);
-	void CreateTile(int rowCount, int columnCount, int cellWidth);
-	void TileListPrintout();
-	void DrawTile(sf::RenderWindow* window);
-	void TileHovered(sf::Vector2i mousePosition);
-	void setTileColors();
-
-
-
+	void SpawnSectors();
+	void RepositionSectors();
+	void Zoom(int mouseSignal);
 
 };
 

@@ -14,8 +14,10 @@ Tile::Tile()
 	clicked = false;
 	hovered = false;
 	rectangle = sf::RectangleShape(sf::Vector2f(25, 25));
-	rectangle.setPosition(x, y);
-	rectangle.setFillColor(sf::Color(255, 255, 255));
+	tileBaseColor.r = (25);
+	tileBaseColor.g = (25);
+	tileBaseColor.b = (25);
+	rectangle.setFillColor(tileBaseColor);
 	
 
 }

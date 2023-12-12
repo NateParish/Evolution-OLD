@@ -180,8 +180,7 @@ void Critter::MoveCritterWithMouse(sf::Vector2i mousePosition)
 
         x = mousePosition.x - clickedOffsetX;
         y = mousePosition.y - clickedOffsetY;
-        //eye1.setPosition(x + float(width) / 20, y + float(height) / 2.2);
-        //eye2.setPosition(x + float(width) / 20 + float(width) / 2, y + float(height) / 2.2);
+
         cell1.rectangle.setPosition(float(x) + float(width)/2, float(y) + float(width)/2);
         cell2.rectangle.setPosition(cell1.rectangle.getPosition().x, cell1.rectangle.getPosition().y);
         //bodyRectangle2.setPosition(x, y);

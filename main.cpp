@@ -23,18 +23,6 @@ int main()
 	int cellWidth(25);
 
 
-	//sf::Texture eyeTexture;
-	//if (!eyeTexture.loadFromFile("images/GooglyEyes2.png")) {
-	//	// Handle the error if the image cannot be loaded
-	//	std::cerr << "Error loading image." << std::endl;
-	//	return 1;
-	//}
-
-	//sf::Sprite sprite(eyeTexture);
-	//sprite.setPosition(245, 245);
-	//sprite.setScale(.25, .25);
-
-
 	sf::RenderWindow window(sf::VideoMode(1000, 500, 32), "SFML Graphics");
 	sf::RenderWindow* windowPtr(&window);
 	sf::Event e;
@@ -57,20 +45,24 @@ int main()
 
 
 	Sun sun;
-	//Gameboard gameboard;
-	//gameboard.CreateTile(2, 71, cellWidth);
-	//gameboard.TileListPrintout();
+	Gameboard gameboard(windowPtr);
+	
 
-	Sector sector1(windowPtr);
-	sector1.SetAllTilePosition();
-	sector1.SetupGridlines();
+	std::vector<Sector*> sectorList;
+
+	gameboard.SpawnSectors();
+	sectorList = gameboard.sectorList;
+
 
 	GraphicsProcessor graphicsProcessor9000(windowPtr);
 
-	//graphicsProcessor9000.UpdateItemPositions(&sector1);
+	for (Sector* sector : sectorList)
+	{
+		sector->SetAllTilePosition();
+		sector->UpdatePosition();
+		sector->SetupGridlines();
+	}
 
-
-	std::cout << "Sun Output" << sun.output << std::endl;
 
 	Critter critter1(600,300);
 	critter1.name = "Larry";
@@ -94,7 +86,7 @@ int main()
 
 	Critter* critterToDisplayPtr(&critter1);
 
-	std::cout << "The critter to display is:  " << critterToDisplayPtr->name;
+	//std::cout << "The critter to display is:  " << critterToDisplayPtr->name;
 
 
 	sf::Text text;
@@ -106,29 +98,15 @@ int main()
 	sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 	sf::Vector2i mouseAnchor(0, 0);
 	bool mouseAnchorSet = false;
-	std::cout << "**BOOGA** " << mouseAnchorSet << std::endl;
-
+	
 	while (window.isOpen())
 	{
 
-		//std::cout << critter1.isAlive << "     " << critterList.size() << std::endl;
 
 		sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 		critterOldList.clear();
 		critterOldList = critterList;
 		critterList.clear();
-
-
-
-
-
-		
-
-		
-
-		//std::cout << critterOldList.size() << "  /   " << critterList.size() << std::endl;
-
-		//critterList.push_back(&critter1);
 
 
 
@@ -163,8 +141,8 @@ int main()
 			if (e.type == sf::Event::MouseButtonPressed)
 			{
 				mouseClickedFlag = true;
-				moveTerrainFlag = true;
-				mouseAnchor = sf::Mouse::getPosition(window);
+				//moveTerrainFlag = true;
+				//mouseAnchor = sf::Mouse::getPosition(window);
 
 				mousePosition = sf::Mouse::getPosition(window);
 
@@ -177,15 +155,20 @@ int main()
 					if (isCritterClickedFlag == true)
 					{
 						critterToDisplayPtr = critterPtr;
-						moveTerrainFlag = false;
+						//moveTerrainFlag = false;
 					}
 
 				}
+
+				graphicsProcessor9000.GroundClicked(mousePosition, critterList, sectorList);
 
 				
 			}
 			if (e.type == sf::Event::MouseButtonReleased)
 			{
+
+				graphicsProcessor9000.GroundUnClicked();
+
 				for (Critter* critterPtr : critterList)
 				{
 					critterPtr->CritterUnClicked();
@@ -198,40 +181,32 @@ int main()
 				if (e.key.code == sf::Keyboard::Space) {
 					//critter1.Kill();
 					//critter1.RotateCritter();
-					graphicsProcessor9000.UpdateItemPositions(&sector1);
+					//graphicsProcessor9000.UpdateItemPositions(&sector1);
 				}
 			}
 
-		}
-
-
-
-		if (mouseClickedFlag == true)
-		{
-			sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
-
-			if (mouseAnchorSet == false);
+			if (e.type == sf::Event::MouseWheelMoved)
 			{
-				mouseAnchor = sf::Mouse::getPosition(window);
-				mouseAnchorSet = true;
-				std::cout << "mouse Anchor has been set!" << std::endl;
+				gameboard.Zoom(e.mouseWheel.delta);
+
 			}
 
-			std::cout << "mouseClickedFlag: " << mouseClickedFlag <<  " mouseAnchorSet: " << mouseAnchorSet << "  anchorx:  " << mouseAnchor.x << " anchorY : " << mouseAnchor.y << " mousex : " << mousePosition.x << " mousey : " << mousePosition.y << " diff : " << mouseAnchor.x - mousePosition.x << ", " << mouseAnchor.y - mousePosition.y << std::endl;
-
 		}
 
 
-		critterStats.DrawBox(windowPtr, critterToDisplayPtr);
-		//ground1.DrawGround(windowPtr);
-		//newGround.DrawGround(windowPtr);
 
-		//gameboard.TileHovered(mousePosition);
-		//gameboard.DrawTile(windowPtr);
-		sector1.DrawAllTiles();
-		sector1.DrawGridlines();
-		//gameboard.DrawGrid(windowPtr);
-		
+		graphicsProcessor9000.MoveScreen(mousePosition, critterList, sectorList);
+
+		for (Sector* sector : sectorList)
+		{
+			sector->DrawAllTiles();
+			sector->UpdateGridlinePosition();
+			sector->TileHovered(mousePosition);
+			sector->tile1.rectangle.setFillColor(sf::Color(0, 255, 255));
+			sector->tile6.rectangle.setFillColor(sf::Color(255, 0, 255));
+			//sector->DrawGridlines();
+		}
+
 
 		for (Critter* critterPtr : critterList)
 		{
@@ -242,9 +217,7 @@ int main()
 			critterPtr->DrawCritter(windowPtr);
 		}
 
-		//window.draw(sprite);
-		//ground.DrawGrid(windowPtr);
-		//window.draw(text);
+		critterStats.DrawBox(windowPtr, critterToDisplayPtr);
 		window.display();
 
 	}
