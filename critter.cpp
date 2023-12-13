@@ -1,12 +1,14 @@
 #include <iostream>
 #include "critter.h"
+#include <random>
 
 
 
 
 Critter::Critter()
 {
-    name = "No Name Assigned";
+    firstName = "No Name Assigned";
+    lastName = "No Name Assigned";
     bodyRectangle;
     x = 500;
     y = 500;
@@ -18,7 +20,7 @@ Critter::Critter()
     clickedOffsetY = 0;
     hydration = 100;
     fpsCounter = 0;
-    cell1;
+    //cell1;
     //eye1;
     //eye2;
     
@@ -26,7 +28,8 @@ Critter::Critter()
 
 Critter::Critter(int positionX, int positionY)
 {
-    name = "No Name Assigned";
+    firstName = "No Name Assigned";
+    lastName = "No Name Assigned";
     bodyRectangle;
     bodyRectangle2;
     x = positionX;
@@ -37,8 +40,12 @@ Critter::Critter(int positionX, int positionY)
     isAlive = true;
     clickedOffsetX = 0;
     clickedOffsetY = 0;
-    hydration = 10;
+    hydration = 100;
     fpsCounter = 0;
+    reproduceCounterStart = 100;
+    reproduceCounter = reproduceCounterStart;
+    reproduceFlag = false;
+    
     //eye1;
     //eye2;
     eyeTexture;
@@ -205,6 +212,17 @@ void Critter::UpdateCritter(int FPS)
 
     hydration = hydration - (1 / float(FPS));
 
+    if (reproduceCounter < 1)
+    {
+        reproduceCounter = reproduceCounterStart;
+        reproduceFlag = true;
+        //std::cout << "reproduce!";
+    }
+    else
+    {
+        reproduceCounter--;
+    }
+
 }
 
 void Critter::Kill()
@@ -226,5 +244,15 @@ void Critter::GrimReaper()
     {
         Kill();
     }
+
+}
+
+void Critter::RandomReproductionRate()
+{
+    std::random_device rd;
+    std::mt19937 generator(rd());
+    std::uniform_int_distribution<int> distribution(0, 255);
+    int random_number = distribution(generator);
+    reproduceCounterStart = random_number*5;
 
 }

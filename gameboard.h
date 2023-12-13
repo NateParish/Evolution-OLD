@@ -2,7 +2,6 @@
 #include <iostream>
 #include <vector>
 #include "SFML/Graphics.hpp"
-#include "vars.cpp"
 #include "tile.h"
 #include "sector.h"
 

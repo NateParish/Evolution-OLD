@@ -10,6 +10,7 @@
 #include "gameboard.h"
 #include "sector.h"
 #include "graphics_processor.h"
+#include "critter_manager.h"
 //#include "DNA.h"
 
 
@@ -63,28 +64,34 @@ int main()
 		sector->SetupGridlines();
 	}
 
+	CritterManager critterManager2000;
+	CritterManager* critterManagerPtr(&critterManager2000);
+	critterManager2000.PopulateNameGenerator();
+	//critterManager2000.GenerateName();
 
-	Critter critter1(600,300);
-	critter1.name = "Larry";
-	critter1.generateBody();
+	critterManager2000.SpawnFirstCritter();
 
-	Critter critter2(800,300);
-	critter2.name = "Sebastian";
-	critter2.generateBody();
+	//Critter critter1(600,300);
+	//critter1.name = "Larry";
+	//critter1.generateBody();
 
-	critter2.cell1.rectangle.setFillColor(sf::Color(255, 30, 30));
+	//Critter critter2(800,300);
+	//critter2.name = "Sebastian";
+	//critter2.generateBody();
+
+	//critter2.cell1.rectangle.setFillColor(sf::Color(255, 30, 30));
 
 
 	std::vector<Critter*> critterList;
-	critterList.push_back(&critter1);
-	critterList.push_back(&critter2);
+	//critterList.push_back(&critter1);
+	//critterList.push_back(&critter2);
 
 	std::vector<Critter*> critterOldList;
 
 	CritterStatsBox critterStats;
 	critterStats.SetupFonts();
 
-	Critter* critterToDisplayPtr(&critter1);
+	Critter* critterToDisplayPtr(critterManagerPtr->livingCritters->at(0));
 
 	//std::cout << "The critter to display is:  " << critterToDisplayPtr->name;
 
@@ -102,11 +109,12 @@ int main()
 	while (window.isOpen())
 	{
 
-
+		//critterList = *critterManager2000.listOfAllCritters;
 		sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
-		critterOldList.clear();
-		critterOldList = critterList;
+		//critterOldList.clear();
+		//critterOldList = critterList;
 		critterList.clear();
+		critterList = *critterManager2000.listOfAllCritters;
 
 
 
@@ -115,12 +123,31 @@ int main()
 		{
 			if (critterPtr->isAlive == true)
 			{
-				critterList.push_back(critterPtr);
+				//critterList.push_back(critterPtr);
 
 			}
 
 		}
 
+
+
+		for (Critter* critter : critterList)
+		{
+
+			//std::cout << critterManagerPtr->livingCritters.size();
+
+			if (critter->reproduceFlag == true)
+			{
+				//std::cout << "bow chicka wow wow" << std::endl;
+				critter->reproduceFlag = false;
+				critterManager2000.SpawnNewCritter(critter);
+
+				//Critter newCritter(critter->x, critter->y - 50);
+				//critterList.push_back(&newCritter);
+
+			}
+
+		}
 
 
 
@@ -195,7 +222,7 @@ int main()
 
 
 
-		graphicsProcessor9000.MoveScreen(mousePosition, critterList, sectorList);
+		graphicsProcessor9000.MoveScreen(mousePosition, *critterManagerPtr->livingCritters, sectorList);
 
 		for (Sector* sector : sectorList)
 		{
@@ -206,9 +233,8 @@ int main()
 		}
 
 
-		for (Critter* critterPtr : critterList)
+		for (Critter* critterPtr : *critterManagerPtr->livingCritters)
 		{
-
 			critterPtr->GrimReaper();
 			critterPtr->MoveCritterWithMouse(mousePosition);
 			critterPtr->UpdateCritter(FPS);
@@ -217,6 +243,8 @@ int main()
 
 		critterStats.DrawBox(windowPtr, critterToDisplayPtr);
 		window.display();
+
+		std::cout << critterList.size() << std::endl;
 
 	}
 

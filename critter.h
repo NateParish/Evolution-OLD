@@ -9,7 +9,8 @@ class Critter
 
 public:
 
-	std::string name;
+	std::string firstName;
+	std::string lastName;
 	sf::RectangleShape bodyRectangle;
 	sf::RectangleShape bodyRectangle2;
 	int x;
@@ -29,6 +30,9 @@ public:
 	std::vector<Cell*> listOfCells;
 
 	float hydration;
+	float reproduceCounterStart;
+	float reproduceCounter;
+	bool reproduceFlag;
 
 	Critter();
 	~Critter();
@@ -44,6 +48,7 @@ public:
 	void Kill();
 	void RotateCritter();
 	void GrimReaper();
+	void RandomReproductionRate();
 
 
 };

@@ -20,6 +20,7 @@ public:
 	sf::Text nameText;
 	sf::Text hydrationText;
 	sf::Text counterText;
+	sf::Text repCounterText;
 
 	CritterStatsBox();
 	~CritterStatsBox();

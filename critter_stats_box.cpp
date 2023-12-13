@@ -21,6 +21,7 @@ CritterStatsBox::CritterStatsBox()
 	nameText;
 	hydrationText;
 	counterText;
+	repCounterText;
 
 }
 
@@ -33,23 +34,27 @@ CritterStatsBox::~CritterStatsBox()
 void CritterStatsBox::DrawBox(sf::RenderWindow* window, Critter* critterToDisplayPtr)
 {
 
-	nameText.setString("Critter Name:     " + critterToDisplayPtr->name);
+	nameText.setString("Critter Name:     " + critterToDisplayPtr->firstName + " " + critterToDisplayPtr->lastName);
 
 	std::string formattedHydration = "Hydration:         " + std::to_string(critterToDisplayPtr->hydration);
 	formattedHydration = formattedHydration.substr(0, formattedHydration.find('.') + 3);
 
+	std::string formattedRepCounter = "Rep Counter:         " + std::to_string(critterToDisplayPtr->reproduceCounter);
+	formattedRepCounter = formattedRepCounter.substr(0, formattedRepCounter.find('.') + 3);
 
 
 	hydrationText.setString(formattedHydration);
 	counterText.setString("FPS Counter:     " + std::to_string(critterToDisplayPtr->fpsCounter));
 
-
+	repCounterText.setString(formattedHydration);
+	repCounterText.setString(formattedRepCounter);
 
 
 	window->draw(rectangle);
 	window->draw(nameText);
 	window->draw(hydrationText);
 	window->draw(counterText);
+	window->draw(repCounterText);
 
 }
 
@@ -71,6 +76,11 @@ void CritterStatsBox::SetupFonts()
 	counterText.setCharacterSize(14);
 	counterText.setFillColor(sf::Color::White);
 	counterText.setPosition(x + 10, y + 46);
+
+	repCounterText.setFont(font1);
+	repCounterText.setCharacterSize(14);
+	repCounterText.setFillColor(sf::Color::White);
+	repCounterText.setPosition(x + 10, y + 64);
 
 }
 

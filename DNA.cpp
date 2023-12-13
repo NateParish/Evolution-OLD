@@ -36,7 +36,7 @@ void DNA::setDNAsequence(std::string inputDNAsequence)
 
 void DNA::CreateGenes()
 {
-    std::cout << "Create Genes: DNA Sequence:  " << DNAsequence << std::endl;
+    //std::cout << "Create Genes: DNA Sequence:  " << DNAsequence << std::endl;
 
     colorRedGene.geneName = "ColorRed";
     colorRedGene.geneSequence = DNAsequence.substr(0, 4);

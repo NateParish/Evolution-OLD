@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="cell.cpp" />
     <ClCompile Include="critter.cpp" />
+    <ClCompile Include="critter_manager.cpp" />
     <ClCompile Include="critter_stats_box.cpp" />
     <ClCompile Include="DNA.cpp" />
     <ClCompile Include="gene.cpp" />
@@ -150,12 +151,12 @@
     <ClCompile Include="tile.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="sector.cpp" />
-    <ClCompile Include="vars.cpp" />
     <ClCompile Include="sun.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cell.h" />
     <ClInclude Include="critter.h" />
+    <ClInclude Include="critter_manager.h" />
     <ClInclude Include="critter_stats_box.h" />
     <ClInclude Include="DNA.h" />
     <ClInclude Include="gene.h" />

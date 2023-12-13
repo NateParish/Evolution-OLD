@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="cell.cpp">
+      <Filter>critters</Filter>
+    </ClCompile>
+    <ClCompile Include="critter.cpp">
+      <Filter>critters</Filter>
+    </ClCompile>
+    <ClCompile Include="DNA.cpp">
+      <Filter>critters</Filter>
+    </ClCompile>
+    <ClCompile Include="gene.cpp">
+      <Filter>critters</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics_processor.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="gameboard.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="sector.cpp">
+      <Filter>ground</Filter>
+    </ClCompile>
+    <ClCompile Include="tile.cpp">
+      <Filter>ground</Filter>
+    </ClCompile>
+    <ClCompile Include="critter_stats_box.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="geneticcalculator.cpp">
+      <Filter>critters</Filter>
+    </ClCompile>
+    <ClCompile Include="sun.cpp">
+      <Filter>environment</Filter>
+    </ClCompile>
+    <ClCompile Include="critter_manager.cpp">
+      <Filter>critters</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="cell.h">
+      <Filter>critters</Filter>
+    </ClInclude>
+    <ClInclude Include="critter.h">
+      <Filter>critters</Filter>
+    </ClInclude>
+    <ClInclude Include="DNA.h">
+      <Filter>critters</Filter>
+    </ClInclude>
+    <ClInclude Include="gene.h">
+      <Filter>critters</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics_processor.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="gameboard.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="sector.h">
+      <Filter>ground</Filter>
+    </ClInclude>
+    <ClInclude Include="tile.h">
+      <Filter>ground</Filter>
+    </ClInclude>
+    <ClInclude Include="critter_stats_box.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="geneticcalculator.h">
+      <Filter>critters</Filter>
+    </ClInclude>
+    <ClInclude Include="sun.h">
+      <Filter>environment</Filter>
+    </ClInclude>
+    <ClInclude Include="critter_manager.h">
+      <Filter>critters</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="critters">
+      <UniqueIdentifier>{f9345f82-de7e-4916-a8f5-f6ef44f35b0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI">
+      <UniqueIdentifier>{321de0f9-c54b-4696-b7f6-285791fd53c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ground">
+      <UniqueIdentifier>{cac6a8d0-3130-4630-9704-50cd7ba6969e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="environment">
+      <UniqueIdentifier>{6e67ab2f-e631-4ce7-a7fd-f3f16e3e2552}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
