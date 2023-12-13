@@ -5,7 +5,7 @@ Sector::Sector(sf::RenderWindow* window)
 {
 	windowPtr = window;
 	originX = 0;
-	originY = 250;
+	originY = 0;
 	cellSize = 25;
 	width = 6 * cellSize;
 	column = 0;

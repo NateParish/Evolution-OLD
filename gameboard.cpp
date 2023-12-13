@@ -9,10 +9,10 @@ Gameboard::Gameboard(sf::RenderWindow* windowPtr)
 	cellSize = cellInitialSize * zoom;
 	gameBoardX = 10;
 	gameBoardY = 150;
-	//sectorColumnCount = 13;
-	//sectorRowCount = 7;
-	sectorColumnCount = 2;
-	sectorRowCount = 2;
+	sectorColumnCount = 20;
+	sectorRowCount = 20;
+	//sectorColumnCount = 2;
+	//sectorRowCount = 2;
 	window = windowPtr;
 	sectorList;
 	
@@ -42,7 +42,7 @@ void Gameboard::SpawnSectors()
 			sector->originX = sector->originX + (6 * sector->cellSize * k);
 			sector->originY = sector->originY + (6 * sector->cellSize * i);
 			sector->column = k + 1;
-			sector->row = k + 1;
+			sector->row = i + 1;
 			sector->SetAllTilePosition();
 			sector->UpdatePosition();
 			sector->SetupGridlines();
@@ -74,7 +74,7 @@ void Gameboard::RepositionSectors()
 
 void Gameboard::Zoom(int mouseSignal)
 {
-	std::cout << "MOUSE SIGNAL" << mouseSignal << std::endl;
+	//std::cout << "MOUSE SIGNAL" << mouseSignal << std::endl;
 
 	int i = 0;
 	int k = 0;
@@ -84,74 +84,33 @@ void Gameboard::Zoom(int mouseSignal)
 	int startX = firstSector->originX;
 	int startY = firstSector->originY;
 	
-
-
-
 	if (mouseSignal > 0)
 	{
-		std::cout << "UP DAWG" << std::endl;
 		zoom++;
-		cellSize = cellSize * zoom;
-		//std::cout << cellSize << std::endl;
-
-		Sector* firstSector = sectorList.at(0);
-
-		int startX = firstSector->originX;
-		int startY = firstSector->originY;
-		std::cout << startX << " " << startY << std::endl;
-
-		for (Sector* sector : sectorList)
-		{
-			sector->cellSize = cellSize;
-			//std::cout << sector->originX << std::endl;
-			int sectorStartX = startX + (sector->column - 1) * 6 * cellSize;
-			std::cout << sector->column << std::endl;
-			int sectorStartY = startY + (sector->row - 1) * 6 * cellSize;
-			std::cout << "sectorStartY: " << sectorStartY << " startY " << startY << " curRow " << sector->row << std::endl;
-			//std::cout << sector->originX << std::endl;
-			std::cout << "StartY " << sectorStartY << std::endl;
-			//std::cout << sector->row << std::endl;
-
-
-			sector->UpdateOrigin(sectorStartX, sectorStartY);
-			sector->UpdatePosition();
-		}
-
-
 	}
-	else
+	if (mouseSignal < 0)
 	{
-		//std::cout << "Down DAWG" << std::endl;
+
 		if (zoom > 1)
+
 		{
 			zoom--;
 		}
 
-		Sector* firstSector = sectorList.at(0);
-
-		int startX = firstSector->originX;
-
-		for (Sector* sector : sectorList)
-		{
-			sector->cellSize = cellSize;
-			std::cout << sector->originX << std::endl;
-
-			sector->UpdateOrigin(startX + (sector->column - 1) * 6 * cellSize, sector->originY);
-			sector->UpdatePosition();
-		}
-
 	}
 
+	
 	cellSize = cellInitialSize * zoom;
 
-	//for (Sector* sector : sectorList)
-	//{
-	//	sector->cellSize = cellSize;
-	//	//sector->UpdateOrigin(sector->originX + (sector->column-1)*sector->cellSize*6, sector->originY);
-	//	sector->UpdatePosition();
-	//	//sector->UpdateGridlinePosition();
-	//}
+	for (Sector* sector : sectorList)
+	{
+		sector->cellSize = cellSize;
+		int sectorStartX = startX + (sector->column - 1) * 6 * cellSize;
+		int sectorStartY = startY + (sector->row - 1) * 6 * cellSize;
 
-	//std::cout << "ZOOM: " << zoom << std::endl;
+		sector->UpdateOrigin(sectorStartX, sectorStartY);
+		sector->UpdatePosition();
+	}
+
 }
 

@@ -160,14 +160,14 @@ int main()
 
 				}
 
-				graphicsProcessor9000.GroundClicked(mousePosition, critterList, sectorList);
+				//graphicsProcessor9000.GroundClicked(mousePosition, critterList, sectorList);
 
 				
 			}
 			if (e.type == sf::Event::MouseButtonReleased)
 			{
 
-				graphicsProcessor9000.GroundUnClicked();
+				//graphicsProcessor9000.GroundUnClicked();
 
 				for (Critter* critterPtr : critterList)
 				{
@@ -187,7 +187,7 @@ int main()
 
 			if (e.type == sf::Event::MouseWheelMoved)
 			{
-				gameboard.Zoom(e.mouseWheel.delta);
+				//gameboard.Zoom(e.mouseWheel.delta);
 
 			}
 
@@ -201,10 +201,8 @@ int main()
 		{
 			sector->DrawAllTiles();
 			sector->UpdateGridlinePosition();
-			sector->TileHovered(mousePosition);
-			sector->tile1.rectangle.setFillColor(sf::Color(0, 255, 255));
-			sector->tile6.rectangle.setFillColor(sf::Color(255, 0, 255));
-			//sector->DrawGridlines();
+			//sector->TileHovered(mousePosition);
+			sector->DrawGridlines();
 		}
 
 
