@@ -113,7 +113,7 @@ int main()
 
 	critterList = *critterManager2000.listOfAllCritters;
 
-	while (window.isOpen() && performanceWindow.isOpen())
+	while (window.isOpen())
 	{
 		//start_time = std::chrono::high_resolution_clock::now();
 
