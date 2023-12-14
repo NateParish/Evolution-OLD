@@ -73,9 +73,18 @@ void CritterManager::PopulateNameGenerator()
 void CritterManager::GenerateName(Critter* targetCritter)
 {
 
-	std::srand(static_cast<unsigned int>(std::time(nullptr)));
-	size_t randomIndex1 = std::rand() % listOfFirstNames->size();
-	size_t randomIndex2 = std::rand() % listOfLastNames->size();
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<int> distrib(0, listOfFirstNames->size());
+	std::uniform_int_distribution<int> distrib2(0, listOfLastNames->size());
+
+	int randomNumber = distrib(gen);
+	int randomNumber2 = distrib2(gen);
+
+
+	//std::srand(static_cast<unsigned int>(std::time(nullptr)));
+	//size_t randomIndex1 = std::rand() % listOfFirstNames->size();
+	//size_t randomIndex2 = std::rand() % listOfLastNames->size();
 	std::string firstName;
 	std::string lastName;
 
@@ -83,7 +92,7 @@ void CritterManager::GenerateName(Critter* targetCritter)
 
 	if (!listOfFirstNames->empty()) 
 	{
-		firstName = (*listOfFirstNames)[randomIndex1];
+		firstName = (*listOfFirstNames)[randomNumber];
 		//firstName = listOfFirstNames[randomIndex1];		
 	}
 	else 
@@ -93,7 +102,7 @@ void CritterManager::GenerateName(Critter* targetCritter)
 
 	if (!listOfLastNames->empty()) 
 	{
-		lastName = (*listOfLastNames)[randomIndex2];
+		lastName = (*listOfLastNames)[randomNumber2];
 		//lastName = listOfLastNames[randomIndex2];
 	}
 	else 
@@ -115,7 +124,7 @@ void CritterManager::SpawnNewCritter(Critter* parent)
 	parent->CreateNewMutatedDNA();
 	Critter* critter = new Critter(parent->x + parent->width*2, parent->y, parent->CreateNewMutatedDNA());
 	//critter->DNArandomMutate();
-	std::cout << critter->DNAsequence << std::endl;
+	//std::cout << critter->DNAsequence << std::endl;
 	critter->generateBody();
 	critter->RandomReproductionRate();
 	GenerateName(critter);

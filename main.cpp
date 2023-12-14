@@ -13,6 +13,7 @@
 #include "sector.h"
 #include "graphics_processor.h"
 #include "critter_manager.h"
+#include "performance_window.h"
 //#include "DNA.h"
 
 
@@ -25,14 +26,19 @@ int main()
 
 	int cellWidth(25);
 
-
+	sf::RenderWindow performanceWindow(sf::VideoMode(1000, 500, 32), "Performance Window");
 	sf::RenderWindow window(sf::VideoMode(1000, 500, 32), "SFML Graphics");
+	sf::RenderWindow* performanceWindowPtr(&performanceWindow);
 	sf::RenderWindow* windowPtr(&window);
+
 	sf::Event e;
 	window.setFramerateLimit(FPS);
+	performanceWindow.setFramerateLimit(FPS);
 	bool isCritterClickedFlag(false);
 	bool moveTerrainFlag(false);
 	bool mouseClickedFlag(false);
+
+	PerformanceWindow performanceWindow3000(performanceWindowPtr);
 
 
 	sf::Font font;
@@ -73,20 +79,9 @@ int main()
 
 	critterManager2000.SpawnFirstCritter();
 
-	//Critter critter1(600,300);
-	//critter1.name = "Larry";
-	//critter1.generateBody();
-
-	//Critter critter2(800,300);
-	//critter2.name = "Sebastian";
-	//critter2.generateBody();
-
-	//critter2.cell1.rectangle.setFillColor(sf::Color(255, 30, 30));
 
 
 	std::vector<Critter*> critterList;
-	//critterList.push_back(&critter1);
-	//critterList.push_back(&critter2);
 
 	std::vector<Critter*> critterOldList;
 
@@ -118,7 +113,7 @@ int main()
 
 	critterList = *critterManager2000.listOfAllCritters;
 
-	while (window.isOpen())
+	while (window.isOpen() && performanceWindow.isOpen())
 	{
 		//start_time = std::chrono::high_resolution_clock::now();
 
@@ -178,8 +173,12 @@ int main()
 
 
 		window.clear();
+		performanceWindow.clear();
 
 		//mouseClickedFlag = false;
+
+		performanceWindow3000.PollEvents();
+
 
 		while (window.pollEvent(e))
 		{
@@ -248,6 +247,8 @@ int main()
 
 
 
+
+
 		graphicsProcessor9000.MoveScreen(mousePosition, *critterManagerPtr->livingCritters, sectorList);
 
 		for (Sector* sector : sectorList)
@@ -268,6 +269,11 @@ int main()
 		}
 
 		critterStats.DrawBox(windowPtr, critterToDisplayPtr, durationExtracted, critterList.size());
+
+		//performanceWindow3000.DisplayFPSData(durationExtracted);
+		performanceWindow3000.UpdateAll(durationExtracted, critterList.size());
+
+		performanceWindow.display();
 		window.display();
 
 		//std::cout << critterList.size() << std::endl;

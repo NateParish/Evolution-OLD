@@ -338,7 +338,7 @@ std::string Critter::CreateNewMutatedDNA()
     char newChar('0');
 
 
-    std::cout << length << std::endl;
+    //std::cout << length << std::endl;
 
     std::random_device rd;
     std::mt19937 gen(rd());
@@ -347,7 +347,7 @@ std::string Critter::CreateNewMutatedDNA()
 
     int randomNumber = distrib(gen);
     int randomNumber2 = 0;
-    std::cout << randomNumber;
+    //std::cout << randomNumber;
 
     for (int i = 0; i < length; i++)
     {
@@ -377,7 +377,7 @@ std::string Critter::CreateNewMutatedDNA()
             }
 
 
-            std::cout << "Random 2:    " << randomNumber2 << "New Character:  " << newChar << std::endl;
+            //std::cout << "Random 2:    " << randomNumber2 << "New Character:  " << newChar << std::endl;
 
             newDNAsequence = newDNAsequence + newChar;
 

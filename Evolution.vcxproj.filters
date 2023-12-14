@@ -38,6 +38,9 @@
     <ClCompile Include="critter_manager.cpp">
       <Filter>critters</Filter>
     </ClCompile>
+    <ClCompile Include="performance_window.cpp">
+      <Filter>performance</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cell.h">
@@ -76,6 +79,9 @@
     <ClInclude Include="critter_manager.h">
       <Filter>critters</Filter>
     </ClInclude>
+    <ClInclude Include="performance_window.h">
+      <Filter>performance</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="critters">
@@ -89,6 +95,9 @@
     </Filter>
     <Filter Include="environment">
       <UniqueIdentifier>{6e67ab2f-e631-4ce7-a7fd-f3f16e3e2552}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="performance">
+      <UniqueIdentifier>{ea17bec3-9637-425e-a71d-584c5974b138}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
