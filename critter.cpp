@@ -26,7 +26,7 @@ Critter::Critter()
     
 }
 
-Critter::Critter(int positionX, int positionY)
+Critter::Critter(int positionX, int positionY, std::string DNA)
 {
     firstName = "No Name Assigned";
     lastName = "No Name Assigned";
@@ -40,11 +40,12 @@ Critter::Critter(int positionX, int positionY)
     isAlive = true;
     clickedOffsetX = 0;
     clickedOffsetY = 0;
-    hydration = 100;
+    hydration = 25;
     fpsCounter = 0;
     reproduceCounterStart = 100;
     reproduceCounter = reproduceCounterStart;
     reproduceFlag = false;
+    DNAsequence = DNA;
     
     //eye1;
     //eye2;
@@ -52,10 +53,10 @@ Critter::Critter(int positionX, int positionY)
 
     listOfCells;
 
-    if (!eyeTexture.loadFromFile("images/GooglyEyes2.png")) {
-        // Handle the error if the image cannot be loaded
-        std::cerr << "Error loading image." << std::endl;
-    }
+    //if (!eyeTexture.loadFromFile("images/GooglyEyes2.png")) {
+    //    // Handle the error if the image cannot be loaded
+    //    //std::cerr << "Error loading image." << std::endl;
+    //}
     
 }
 
@@ -73,7 +74,7 @@ void Critter::generateBody()
 
    
 
-    cell1.GenerateDNA("TAGGTATACACCCCCCCCCC");
+    cell1.GenerateDNA(DNAsequence);
     cell1.geneticCode.CreateGenes();
     int red(stoi(geneCalc5000.ConvertToBase10(geneCalc5000.ConvertBasesToNumbers(cell1.geneticCode.colorRedGene.geneSequence))));
     int green(stoi(geneCalc5000.ConvertToBase10(geneCalc5000.ConvertBasesToNumbers(cell1.geneticCode.colorGreenGene.geneSequence))));
@@ -98,7 +99,7 @@ void Critter::generateBody()
     
     //bodyRectangle2.setPosition(x,y);
 
-    cell2.GenerateDNA("TAGGTATACACCCCCCCCCC");
+    cell2.GenerateDNA(DNAsequence);
     cell2.geneticCode.CreateGenes();
     red = stoi(geneCalc5000.ConvertToBase10(geneCalc5000.ConvertBasesToNumbers(cell2.geneticCode.colorRedGene.geneSequence)));
     green = stoi(geneCalc5000.ConvertToBase10(geneCalc5000.ConvertBasesToNumbers(cell2.geneticCode.colorGreenGene.geneSequence)));
@@ -251,8 +252,149 @@ void Critter::RandomReproductionRate()
 {
     std::random_device rd;
     std::mt19937 generator(rd());
-    std::uniform_int_distribution<int> distribution(0, 255);
+    std::uniform_int_distribution<int> distribution(100, 5000);
     int random_number = distribution(generator);
-    reproduceCounterStart = random_number*5;
+    reproduceCounter = random_number;
 
+}
+
+void Critter::DNArandomMutate()
+{
+    int length(DNAsequence.size());
+    std::string oldDNAsequence;
+    std::string newDNAsequence;
+    char newChar('0');
+
+
+    std::cout << length << std::endl;
+
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<int> distrib(1, 10);
+    std::uniform_int_distribution<int> distrib2(0, 3);
+
+    int randomNumber = distrib(gen);
+    int randomNumber2 = 0;
+    std::cout << randomNumber;
+    
+    for (int i = 0; i < length; i++)
+    {
+        randomNumber = distrib(gen);
+
+        if (randomNumber == 1)
+
+
+        {
+            randomNumber2 = distrib2(gen);
+
+            if (randomNumber2 == 0)
+            {
+                newChar = 'A';
+            }
+            else if (randomNumber2 == 1)
+            {
+                newChar = 'G';
+            }
+            else if (randomNumber2 == 2)
+            {
+                newChar = 'T';
+            }
+            else if (randomNumber2 == 3)
+            {
+                newChar = 'C';
+            }
+                        
+
+            std::cout << "Random 2:    " << randomNumber2 << "New Character:  " << newChar << std::endl;
+
+            newDNAsequence = newDNAsequence + newChar;
+
+
+            
+
+        }
+        else
+
+        {
+            newDNAsequence = newDNAsequence + DNAsequence[i];
+        }
+
+  
+
+        //std::cout << DNAsequence[i] << std::endl;
+    }
+
+    std::cout << randomNumber << std::endl;
+    std::cout << "NEW DNA SEQUENCE " << newDNAsequence << std::endl;
+
+
+}
+
+std::string Critter::CreateNewMutatedDNA()
+{
+    int length(DNAsequence.size());
+    std::string oldDNAsequence;
+    std::string newDNAsequence;
+    char newChar('0');
+
+
+    std::cout << length << std::endl;
+
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<int> distrib(1, 10);
+    std::uniform_int_distribution<int> distrib2(0, 3);
+
+    int randomNumber = distrib(gen);
+    int randomNumber2 = 0;
+    std::cout << randomNumber;
+
+    for (int i = 0; i < length; i++)
+    {
+        randomNumber = distrib(gen);
+
+        if (randomNumber == 1)
+
+
+        {
+            randomNumber2 = distrib2(gen);
+
+            if (randomNumber2 == 0)
+            {
+                newChar = 'A';
+            }
+            else if (randomNumber2 == 1)
+            {
+                newChar = 'G';
+            }
+            else if (randomNumber2 == 2)
+            {
+                newChar = 'T';
+            }
+            else if (randomNumber2 == 3)
+            {
+                newChar = 'C';
+            }
+
+
+            std::cout << "Random 2:    " << randomNumber2 << "New Character:  " << newChar << std::endl;
+
+            newDNAsequence = newDNAsequence + newChar;
+
+
+
+
+        }
+        else
+
+        {
+            newDNAsequence = newDNAsequence + DNAsequence[i];
+        }
+
+
+
+        //std::cout << DNAsequence[i] << std::endl;
+    }
+
+    return newDNAsequence;
 }

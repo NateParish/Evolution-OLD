@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
+#include <random>
 #include <string>
 #include <cstdlib>
 #include "critter.h"
@@ -13,6 +14,7 @@ public:
 
 	std::vector<Critter*>* listOfAllCritters;
 	std::vector<Critter*>* livingCritters;
+	std::vector<Critter*>* listOfNewCritters;
 
 	std::vector<std::string>* listOfFirstNames;
 	std::vector<std::string>* listOfLastNames;

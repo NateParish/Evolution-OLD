@@ -21,11 +21,13 @@ public:
 	sf::Text hydrationText;
 	sf::Text counterText;
 	sf::Text repCounterText;
+	sf::Text secondsPer60FramesText;
+	sf::Text critterCountText;
 
 	CritterStatsBox();
 	~CritterStatsBox();
 
-	void DrawBox(sf::RenderWindow* window,Critter* critterToDisplayPtr);
+	void DrawBox(sf::RenderWindow* window,Critter* critterToDisplayPtr, float duration, int currentCritterCount);
 	void SetupFonts();
 
 

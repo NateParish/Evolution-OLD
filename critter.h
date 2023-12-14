@@ -22,6 +22,7 @@ public:
 	int clickedOffsetX;
 	int clickedOffsetY;
 	int fpsCounter;
+	std::string DNAsequence;
 	//sf::Sprite eye1;
 	//sf::Sprite eye2;
 	sf::Texture eyeTexture;
@@ -36,7 +37,7 @@ public:
 
 	Critter();
 	~Critter();
-	Critter(int positionX, int positionY);
+	Critter(int positionX, int positionY, std::string DNA);
 
 
 	void generateBody();
@@ -49,6 +50,8 @@ public:
 	void RotateCritter();
 	void GrimReaper();
 	void RandomReproductionRate();
+	void DNArandomMutate();
+	std::string CreateNewMutatedDNA();
 
 
 };

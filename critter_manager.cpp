@@ -5,8 +5,10 @@ CritterManager::CritterManager()
 {
 	listOfAllCritters = new std::vector<Critter*>();
 	livingCritters = new std::vector<Critter*>();
+	listOfNewCritters = new std::vector<Critter*>();
 	listOfFirstNames = new std::vector<std::string>();
 	listOfLastNames = new std::vector<std::string>();
+	 
 
 	//listOfFirstNames;
 	//listOfLastNames;
@@ -25,12 +27,14 @@ CritterManager::~CritterManager()
 	delete listOfFirstNames;
 	delete listOfLastNames;
 	delete listOfAllCritters;
+	delete listOfNewCritters;
 	delete livingCritters;
 }
 
 void CritterManager::SpawnFirstCritter()
 {
-	Critter* critter = new Critter(350,350);
+
+	Critter* critter = new Critter(350,350, "CCCCCCCCCCCCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC");
 	critter->generateBody();
 	GenerateName(critter);
 	listOfAllCritters->push_back(critter);
@@ -106,12 +110,17 @@ void CritterManager::GenerateName(Critter* targetCritter)
 void CritterManager::SpawnNewCritter(Critter* parent)
 {
 	
+	//std::string newDNA = parent->DNAsequence;
 
-	Critter* critter = new Critter(parent->x + parent->width*2, parent->y);
+	parent->CreateNewMutatedDNA();
+	Critter* critter = new Critter(parent->x + parent->width*2, parent->y, parent->CreateNewMutatedDNA());
+	//critter->DNArandomMutate();
+	std::cout << critter->DNAsequence << std::endl;
 	critter->generateBody();
 	critter->RandomReproductionRate();
 	GenerateName(critter);
 	listOfAllCritters->push_back(critter);
 	livingCritters->push_back(critter);
+	listOfNewCritters->push_back(critter);
 
 }

@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <chrono>
+#include <iomanip>
 #include "SFML/Graphics.hpp"
 #include "cell.h"
 #include "critter.h"
@@ -106,16 +108,41 @@ int main()
 	sf::Vector2i mouseAnchor(0, 0);
 	bool mouseAnchorSet = false;
 	
+	auto start_time = std::chrono::high_resolution_clock::now();
+	auto end_time = std::chrono::high_resolution_clock::now();
+	auto duration = std::chrono::duration_cast<std::chrono::duration<float>>(end_time - start_time);
+	float durationExtracted = 1;
+	
+	//float durationToSend = duration;
+	int fpsCounter(0);
+
+	critterList = *critterManager2000.listOfAllCritters;
+
 	while (window.isOpen())
 	{
+		//start_time = std::chrono::high_resolution_clock::now();
 
 		//critterList = *critterManager2000.listOfAllCritters;
 		sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
-		//critterOldList.clear();
-		//critterOldList = critterList;
+		critterOldList.clear();
+		critterOldList = critterList;
 		critterList.clear();
-		critterList = *critterManager2000.listOfAllCritters;
+		//critterList = *critterManager2000.listOfAllCritters;
 
+		//std::cout << critterManager2000.listOfNewCritters;
+
+		critterList = *critterManager2000.listOfNewCritters;
+		critterManager2000.listOfNewCritters->clear();
+
+		if (fpsCounter > 59)
+		{
+			end_time = std::chrono::high_resolution_clock::now();
+			duration = std::chrono::duration_cast<std::chrono::duration<float>>(end_time - start_time);
+			durationExtracted = duration.count();
+
+			fpsCounter = 0;
+			start_time = std::chrono::high_resolution_clock::now();
+		}
 
 
 
@@ -123,7 +150,7 @@ int main()
 		{
 			if (critterPtr->isAlive == true)
 			{
-				//critterList.push_back(critterPtr);
+				critterList.push_back(critterPtr);
 
 			}
 
@@ -141,7 +168,6 @@ int main()
 				//std::cout << "bow chicka wow wow" << std::endl;
 				critter->reproduceFlag = false;
 				critterManager2000.SpawnNewCritter(critter);
-
 				//Critter newCritter(critter->x, critter->y - 50);
 				//critterList.push_back(&newCritter);
 
@@ -233,7 +259,7 @@ int main()
 		}
 
 
-		for (Critter* critterPtr : *critterManagerPtr->livingCritters)
+		for (Critter* critterPtr : critterList)
 		{
 			critterPtr->GrimReaper();
 			critterPtr->MoveCritterWithMouse(mousePosition);
@@ -241,15 +267,18 @@ int main()
 			critterPtr->DrawCritter(windowPtr);
 		}
 
-		critterStats.DrawBox(windowPtr, critterToDisplayPtr);
+		critterStats.DrawBox(windowPtr, critterToDisplayPtr, durationExtracted, critterList.size());
 		window.display();
 
-		std::cout << critterList.size() << std::endl;
+		//std::cout << critterList.size() << std::endl;
+
+		//end_time = std::chrono::high_resolution_clock::now();
+		//duration = std::chrono::duration_cast<std::chrono::duration<float>>(end_time - start_time);
+		//std::cout << "Time taken: " << std::fixed << std::setprecision(2) << duration.count()*60 << " seconds" << std::endl;
+
+		fpsCounter++;
 
 	}
-
-
-
 
 
 

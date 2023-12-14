@@ -17,8 +17,23 @@ public:
 	Gene colorRedGene;
 	Gene colorGreenGene;
 	Gene colorBlueGene;
-	Gene widthGene;
-	Gene heightGene;
+	Gene foodTypeGene;
+	Gene typeOfCritterGene;
+	Gene personalityGene;
+	Gene intelligenceGene;
+	Gene canSeeGene;
+	Gene visionGene;
+	Gene canSmellGene;
+	Gene smellGene;
+	Gene canHearGene;
+	Gene HPgene;
+	Gene armorGene;
+	Gene attackGene;
+	Gene canMoveGene;
+	Gene maxSpeedGene;
+
+	//Gene widthGene;
+	//Gene heightGene;
 
 	DNA();
 	DNA(std::string name, std::string sequence);
