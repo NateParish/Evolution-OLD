@@ -35,7 +35,7 @@ void CritterManager::SpawnFirstCritter()
 {
 
 	Critter* critter = new Critter(350,350, "CCCCCCCCCCCCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC");
-	critter->generateBody();
+	critter->CreateCell();
 	GenerateName(critter);
 	listOfAllCritters->push_back(critter);
 	livingCritters->push_back(critter);
@@ -125,7 +125,7 @@ void CritterManager::SpawnNewCritter(Critter* parent)
 	Critter* critter = new Critter(parent->x + parent->width*2, parent->y, parent->CreateNewMutatedDNA());
 	//critter->DNArandomMutate();
 	//std::cout << critter->DNAsequence << std::endl;
-	critter->generateBody();
+	critter->CreateCell();
 	critter->RandomReproductionRate();
 	GenerateName(critter);
 	listOfAllCritters->push_back(critter);

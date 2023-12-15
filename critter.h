@@ -26,8 +26,8 @@ public:
 	//sf::Sprite eye1;
 	//sf::Sprite eye2;
 	sf::Texture eyeTexture;
-	Cell cell1;
-	Cell cell2;
+	//Cell cell1;
+	//Cell cell2;
 	std::vector<Cell*> listOfCells;
 
 	float hydration;
@@ -40,7 +40,7 @@ public:
 	Critter(int positionX, int positionY, std::string DNA);
 
 
-	void generateBody();
+	void CreateCell();
 	void DrawCritter(sf::RenderWindow* window);
 	bool CritterClicked(sf::Vector2i mousePosition);
 	void CritterUnClicked();

@@ -173,9 +173,8 @@ int main()
 
 			if (critter->reproduceFlag == true)
 			{
-				//std::cout << "bow chicka wow wow" << std::endl;
 				critter->reproduceFlag = false;
-				//critterManager2000.SpawnNewCritter(critter);
+				critterManager2000.SpawnNewCritter(critter);
 
 			}
 
@@ -243,14 +242,14 @@ int main()
 			if (e.type == sf::Event::KeyPressed) {
 				if (e.key.code == sf::Keyboard::Space) {
 					//critter1.Kill();
-					//critter1.RotateCritter();
+					critterList.at(0)->RotateCritter();
 					//graphicsProcessor9000.UpdateItemPositions(&sector1);
 				}
 			}
 
 			if (e.type == sf::Event::MouseWheelMoved)
 			{
-				//gameboard.Zoom(e.mouseWheel.delta);
+				gameboard.Zoom(e.mouseWheel.delta);
 
 			}
 

@@ -62,73 +62,43 @@ Critter::Critter(int positionX, int positionY, std::string DNA)
 
 Critter::~Critter()
 {
-
+    for (Cell* cell : listOfCells) 
+    {
+        delete cell;
+    }
 }
 
-
-
-void Critter::generateBody()
+void Critter::CreateCell()
 {
-    Cell newCell(x,y,width,height);
+    
     GeneticCalculator geneCalc5000;
-
-   
-
-    cell1.GenerateDNA(DNAsequence);
-    cell1.geneticCode.CreateGenes();
-    int red(stoi(geneCalc5000.ConvertToBase10(geneCalc5000.ConvertBasesToNumbers(cell1.geneticCode.colorRedGene.geneSequence))));
-    int green(stoi(geneCalc5000.ConvertToBase10(geneCalc5000.ConvertBasesToNumbers(cell1.geneticCode.colorGreenGene.geneSequence))));
-    int blue(stoi(geneCalc5000.ConvertToBase10(geneCalc5000.ConvertBasesToNumbers(cell1.geneticCode.colorBlueGene.geneSequence))));
-    cell1.SetColorRGB(red, green, blue);
-    cell1.SetRectangleDimensions(width, height);
-
-    //bodyRectangle = cell1.rectangle;
-    bodyRectangle2 = cell1.rectangle;
-    //bodyRectangle2.setFillColor(sf::Color(255, 0, 0));
     
-    cell1.originOffsetX = 0;
-    cell1.originOffsetY = 0;
-    cell1.rectangle.setOrigin((width / 2), height / 2);
-
-
-    //int boxX = bodyRectangle.getOrigin().x;
-   // int boxY = bodyRectangle.getOrigin().y;
-
-
-    cell1.rectangle.setPosition((x + width / 2) + cell1.originOffsetX, y + width / 2 + cell1.originOffsetY);
+    Cell* cell = new Cell();
     
-    //bodyRectangle2.setPosition(x,y);
 
-    cell2.GenerateDNA(DNAsequence);
-    cell2.geneticCode.CreateGenes();
-    red = stoi(geneCalc5000.ConvertToBase10(geneCalc5000.ConvertBasesToNumbers(cell2.geneticCode.colorRedGene.geneSequence)));
-    green = stoi(geneCalc5000.ConvertToBase10(geneCalc5000.ConvertBasesToNumbers(cell2.geneticCode.colorGreenGene.geneSequence)));
-    blue = stoi(geneCalc5000.ConvertToBase10(geneCalc5000.ConvertBasesToNumbers(cell2.geneticCode.colorBlueGene.geneSequence)));
-    cell2.SetColorRGB(red, green, blue);
-    cell2.SetRectangleDimensions(width, height);
-    cell2.rectangle.setFillColor(sf::Color(200, 200, 100));
+    cell->SetupNewCell(DNAsequence);
+    //cell->GenerateDNA(DNAsequence);
+    //cell->geneticCode.CreateGenes();
+    int red(stoi(geneCalc5000.ConvertToBase10(geneCalc5000.ConvertBasesToNumbers(cell->geneticCode.colorRedGene.geneSequence))));
+    int green(stoi(geneCalc5000.ConvertToBase10(geneCalc5000.ConvertBasesToNumbers(cell->geneticCode.colorGreenGene.geneSequence))));
+    int blue(stoi(geneCalc5000.ConvertToBase10(geneCalc5000.ConvertBasesToNumbers(cell->geneticCode.colorBlueGene.geneSequence))));
+    //cell->SetColorRGB(red, green, blue);
+    cell->SetRectangleDimensions(width, height);
 
-    cell2.originOffsetX = (width / 2);
-    cell2.originOffsetY = (height / 2 - height);
 
-    cell2.rectangle.setOrigin((cell2.originOffsetX), cell2.originOffsetY);
-    cell2.rectangle.setPosition(x + width / 2, y + width / 2);
+    // CHANGE TO BE ENTIRE CRITTER
+    bodyRectangle = cell->rectangle;
 
-    Cell* cell1Ptr(&cell1);
-    Cell* cell2Ptr(&cell2);
 
-    listOfCells.push_back(cell1Ptr);
-    listOfCells.push_back(cell2Ptr);
+    cell->originOffsetX = 0;
+    cell->originOffsetY = 0;
+    cell->rectangle.setOrigin((width / 2), height / 2);
 
-    //eye1.setTexture(eyeTexture);
-    //eye1.setPosition(x + float(width)/20, y + float(height)/2.2);
-    //eye1.setScale((float(width) / 2200), -1 * float(width) / 2200);
+    cell->rectangle.setPosition((x + width / 2) + cell->originOffsetX, y + width / 2 + cell->originOffsetY);
 
-   // eye2.setTexture(eyeTexture);
-    //eye2.setPosition(x + float(width) / 20 + float(width) / 2, y + float(height) / 2.2);
+    //Cell* cell1Ptr(&cell1);
 
-   // eye2.setScale(float(width)/2200, -1 * float(width) / 2200);
-
+    listOfCells.push_back(cell);
 
 }
 
@@ -150,15 +120,15 @@ bool Critter::CritterClicked(sf::Vector2i mousePosition)
     {
 
         int xPos = cellPtr->rectangle.getPosition().x - width/2;
-        int yPos = cellPtr->rectangle.getPosition().y;
+        int yPos = cellPtr->rectangle.getPosition().y - height/2;
 
         if (mousePosition.x >= xPos)
         {
             if (mousePosition.x <= (xPos + width))
             {
-                if (mousePosition.y >= yPos + cellPtr->originOffsetY)
+                if (mousePosition.y >= yPos)
                 {
-                    if (mousePosition.y <= (yPos + height) - cellPtr->originOffsetY)
+                    if (mousePosition.y <= (yPos + height))
                     {
                         clicked = true;
                         clickedOffsetX = mousePosition.x - x;
@@ -184,18 +154,13 @@ void Critter::MoveCritterWithMouse(sf::Vector2i mousePosition)
 
     if (clicked == true)
     {
-        //std::cout << mousePosition.x << " " << mousePosition.y << " " << x << " " << y;
 
         x = mousePosition.x - clickedOffsetX;
         y = mousePosition.y - clickedOffsetY;
 
-        cell1.rectangle.setPosition(float(x) + float(width)/2, float(y) + float(width)/2);
-        cell2.rectangle.setPosition(cell1.rectangle.getPosition().x, cell1.rectangle.getPosition().y);
-        //bodyRectangle2.setPosition(x, y);
-
-       // std::cout << cell1.rectangle.getPosition().x << " " << cell1.rectangle.getPosition().y << "    |      " << cell2.rectangle.getPosition().x << " " << cell2.rectangle.getPosition().y << std::endl;
-
-
+        for (Cell* cell : listOfCells) {
+            cell->rectangle.setPosition(float(x) + float(width) / 2, float(y) + float(width) / 2);;
+        }
 
     }
 
@@ -233,9 +198,14 @@ void Critter::Kill()
 
 void Critter::RotateCritter()
 {
-    //bodyRectangle.setOrigin((width/2)-200, height/2);
-    cell1.rectangle.rotate(20);
-    cell2.rectangle.rotate(20);
+    bodyRectangle.setOrigin((width/2)-200, height/2);
+
+    for (Cell* cell : listOfCells) 
+    {
+        cell->rectangle.rotate(20);
+    }
+    //cell1.rectangle.rotate(20);
+    //cell2.rectangle.rotate(20);
 
 }
 

@@ -1,4 +1,5 @@
 #include "cell.h"
+#include "geneticcalculator.h"
 #include "SFML/Graphics.hpp"
 #include <iostream>
 
@@ -122,4 +123,19 @@ void Cell::MoveCell(float dx, float dy)
     x = x + dx;
     y = y + dy;
     rectangle.setPosition(x, y);
+}
+
+void Cell::SetupNewCell(std::string DNAsequence)
+{
+    GenerateDNA(DNAsequence);
+    geneticCode.CreateGenes();
+    GeneticCalculator geneCalc5000;
+
+    int red(stoi(geneCalc5000.ConvertToBase10(geneCalc5000.ConvertBasesToNumbers(geneticCode.colorRedGene.geneSequence))));
+    int green(stoi(geneCalc5000.ConvertToBase10(geneCalc5000.ConvertBasesToNumbers(geneticCode.colorGreenGene.geneSequence))));
+    int blue(stoi(geneCalc5000.ConvertToBase10(geneCalc5000.ConvertBasesToNumbers(geneticCode.colorBlueGene.geneSequence))));
+
+    SetColorRGB(red, green, blue);
+    //SetRectangleDimensions(width, height);
+
 }

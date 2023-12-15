@@ -34,6 +34,7 @@ public:
 	std::string GetColorRGB(std::string desiredColor);
 	void SetColorRGB(int red, int green, int blue);
 	void SetRectangleDimensions(int newWidth, int newHeight);
+	void SetupNewCell(std::string DNAsequence);
 
 private:
 
