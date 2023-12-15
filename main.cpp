@@ -34,6 +34,8 @@ int main()
 	sf::Event e;
 	window.setFramerateLimit(FPS);
 	performanceWindow.setFramerateLimit(FPS);
+
+
 	bool isCritterClickedFlag(false);
 	bool moveTerrainFlag(false);
 	bool mouseClickedFlag(false);
@@ -77,7 +79,18 @@ int main()
 	critterManager2000.PopulateNameGenerator();
 	//critterManager2000.GenerateName();
 
+
+
+
+
+
 	critterManager2000.SpawnFirstCritter();
+
+
+
+
+
+
 
 
 
@@ -162,9 +175,7 @@ int main()
 			{
 				//std::cout << "bow chicka wow wow" << std::endl;
 				critter->reproduceFlag = false;
-				critterManager2000.SpawnNewCritter(critter);
-				//Critter newCritter(critter->x, critter->y - 50);
-				//critterList.push_back(&newCritter);
+				//critterManager2000.SpawnNewCritter(critter);
 
 			}
 
@@ -262,7 +273,7 @@ int main()
 
 		for (Critter* critterPtr : critterList)
 		{
-			critterPtr->GrimReaper();
+			//critterPtr->GrimReaper();
 			critterPtr->MoveCritterWithMouse(mousePosition);
 			critterPtr->UpdateCritter(FPS);
 			critterPtr->DrawCritter(windowPtr);
