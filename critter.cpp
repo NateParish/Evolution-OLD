@@ -10,6 +10,7 @@ Critter::Critter()
     firstName = "No Name Assigned";
     lastName = "No Name Assigned";
     bodyRectangle;
+    bodyCircle;
     x = 500;
     y = 500;
     width = 75;
@@ -83,18 +84,21 @@ void Critter::CreateCell()
     int green(stoi(geneCalc5000.ConvertToBase10(geneCalc5000.ConvertBasesToNumbers(cell->geneticCode.colorGreenGene.geneSequence))));
     int blue(stoi(geneCalc5000.ConvertToBase10(geneCalc5000.ConvertBasesToNumbers(cell->geneticCode.colorBlueGene.geneSequence))));
     //cell->SetColorRGB(red, green, blue);
-    cell->SetRectangleDimensions(width, height);
+    cell->SetDimensions(width, height);
 
 
     // CHANGE TO BE ENTIRE CRITTER
     bodyRectangle = cell->rectangle;
+    bodyCircle = cell->circle;
 
 
     cell->originOffsetX = 0;
     cell->originOffsetY = 0;
     cell->rectangle.setOrigin((width / 2), height / 2);
+    cell->circle.setOrigin((width / 2), height / 2);
 
     cell->rectangle.setPosition((x + width / 2) + cell->originOffsetX, y + width / 2 + cell->originOffsetY);
+    cell->circle.setPosition((x + width / 2) + cell->originOffsetX, y + width / 2 + cell->originOffsetY);
 
     //Cell* cell1Ptr(&cell1);
 
@@ -106,7 +110,8 @@ void Critter::DrawCritter(sf::RenderWindow* window)
 {
     for (Cell* cellPtr : listOfCells)
     {
-        window->draw(cellPtr->rectangle);
+        //window->draw(cellPtr->rectangle);
+        window->draw(cellPtr->circle);
     }
 
 }
@@ -158,8 +163,11 @@ void Critter::MoveCritterWithMouse(sf::Vector2i mousePosition)
         x = mousePosition.x - clickedOffsetX;
         y = mousePosition.y - clickedOffsetY;
 
-        for (Cell* cell : listOfCells) {
-            cell->rectangle.setPosition(float(x) + float(width) / 2, float(y) + float(width) / 2);;
+        for (Cell* cell : listOfCells) 
+        {
+            cell->rectangle.setPosition(float(x) + float(width) / 2, float(y) + float(width) / 2);
+            cell->circle.setPosition(float(x) + float(width) / 2, float(y) + float(width) / 2);
+
         }
 
     }
@@ -367,4 +375,75 @@ std::string Critter::CreateNewMutatedDNA()
     }
 
     return newDNAsequence;
+}
+
+float Critter::CalculateDistance(float objX, float objY)
+{
+
+    
+
+    float distance= sqrt(pow((x + width/2) - objX, 2) + pow((y+ height/2) - objY, 2));
+    //std::cout << distance << std::endl;
+        
+
+
+    return distance;
+}
+
+void Critter::DistanceToOtherCritters(std::vector<Critter*> critterList)
+{
+    //float distance(2500);
+
+    for (Critter* critterPtr : critterList)
+    {
+        float otherCritterX(critterPtr->x + critterPtr->width / 2);
+        float otherCritterY(critterPtr->x + critterPtr->width / 2);
+
+        float distance(CalculateDistance(otherCritterX, otherCritterY));
+
+        std::cout << "Distance " << distance << std::endl;
+
+
+        if (distance > 0)
+        {
+            if (distance < width)
+            {
+                std::cout << "YES" << std::endl;
+
+                if (x < otherCritterX)
+                {
+                    x = x - 1;
+
+                    for (Cell* cell : critterPtr->listOfCells)
+                    {
+                        bodyCircle.setPosition(float(x) + float(width) / 2, float(y) + float(width) / 2);
+                        cell->rectangle.setPosition(float(x) + float(width) / 2, float(y) + float(width) / 2);
+                        cell->circle.setPosition(float(x) + float(width) / 2, float(y) + float(width) / 2);
+
+                    }
+
+
+                };
+                if (x > otherCritterX)
+                {
+                    x = (x + 1);
+
+
+                    for (Cell* cell : critterPtr->listOfCells)
+                    {
+                        bodyCircle.setPosition(float(x) + float(width) / 2, float(y) + float(width) / 2);
+                        cell->rectangle.setPosition(float(x) + float(width) / 2, float(y) + float(width) / 2);
+                        cell->circle.setPosition(float(x) + float(width) / 2, float(y) + float(width) / 2);
+
+                    }
+
+                };
+
+            }
+            //std::cout << distance << std::endl;
+        }   
+        
+    }
+
+
 }

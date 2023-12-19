@@ -18,7 +18,9 @@ Cell::Cell()
     int red = 255;
     color = sf::Color(red, 0, 0);
     rectangle.setFillColor(color);
+    circle.setFillColor(color);
     rectangle.setPosition(sf::Vector2f(x, y));
+    circle.setPosition(sf::Vector2f(x, y));
     DNA geneticCode();
 
 
@@ -28,7 +30,7 @@ Cell::Cell()
 
 Cell::Cell(float originalX, float originalY, float originalWidth, float originalHeight)
 {
-    // Additional initialization code can go here if needed
+
     x = originalX;
     y = originalY;
     width = originalWidth;
@@ -105,17 +107,21 @@ void Cell::SetColorRGB(int red, int green, int blue)
 {
     color = sf::Color(red, green, blue);
     rectangle.setFillColor(color);
+    circle.setFillColor(color);
 }
 
-void Cell::SetRectangleDimensions(int width, int height)
+void Cell::SetDimensions(int width, int height)
 {
     rectangle.setSize(sf::Vector2f(width, height));
+    //circle.setSize(sf::Vector2f(width, height));
+    circle.setRadius(width / 2);
 }
 
 void Cell::DrawCell(sf::RenderWindow* window)
 {
-    //window->draw(circle);
-    window->draw(rectangle);
+    window->draw(circle);
+    //window->draw(rectangle);
+
 }
 
 void Cell::MoveCell(float dx, float dy)
@@ -123,6 +129,7 @@ void Cell::MoveCell(float dx, float dy)
     x = x + dx;
     y = y + dy;
     rectangle.setPosition(x, y);
+    circle.setPosition(x, y);
 }
 
 void Cell::SetupNewCell(std::string DNAsequence)

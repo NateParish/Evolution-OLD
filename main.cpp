@@ -115,6 +115,8 @@ int main()
 	sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 	sf::Vector2i mouseAnchor(0, 0);
 	bool mouseAnchorSet = false;
+	//int critterMax = 2;
+	int critterCount = 1;
 	
 	auto start_time = std::chrono::high_resolution_clock::now();
 	auto end_time = std::chrono::high_resolution_clock::now();
@@ -174,7 +176,12 @@ int main()
 			if (critter->reproduceFlag == true)
 			{
 				critter->reproduceFlag = false;
-				critterManager2000.SpawnNewCritter(critter);
+
+				if (critterCount < 2)
+				{
+					critterManager2000.SpawnNewCritter(critter);
+					critterCount++;
+				}
 
 			}
 
@@ -263,7 +270,7 @@ int main()
 
 		for (Sector* sector : sectorList)
 		{
-			sector->DrawAllTiles();
+			//sector->DrawAllTiles();
 			sector->UpdateGridlinePosition();
 			//sector->TileHovered(mousePosition);
 			sector->DrawGridlines();
@@ -274,6 +281,7 @@ int main()
 		{
 			//critterPtr->GrimReaper();
 			critterPtr->MoveCritterWithMouse(mousePosition);
+			critterPtr->DistanceToOtherCritters(critterList);
 			critterPtr->UpdateCritter(FPS);
 			critterPtr->DrawCritter(windowPtr);
 		}
